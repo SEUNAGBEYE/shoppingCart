@@ -15,7 +15,7 @@
 				
 			</div><br><br><br>
 			<spn class=" nav navbar-nav pull-right">
-					<button class="btn btn-success glyphicon glyphicon-shopping-cart"><a href="/product/cart">Cart</a></button>
+					<button class="btn btn-success glyphicon glyphicon-shopping-cart"><a href="/product/cart">Cart<span class="badge">{{ Session::has('cart')? Session::get('cart')->itemsQuantity :'' }}</span></a></button>
 				</span>
 			</div>
 		</div>

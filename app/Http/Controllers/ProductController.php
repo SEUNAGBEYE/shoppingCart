@@ -31,7 +31,7 @@ class ProductController extends Controller
        $cart->addItem($product, $product->id);
 
        \Session::put('cart', $cart);
-       dd(\Session::get('cart'));
+       // dd(\Session::get('cart'));
        return redirect()->back();
        
     }
