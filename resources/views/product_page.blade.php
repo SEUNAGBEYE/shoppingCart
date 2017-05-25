@@ -31,7 +31,7 @@
 					<input type="submit" name="" value="AddToCart" class="glyphicon glyphicon-plus btn btn-success">
 				</form>
 			
-				
+				<!-- bb -->
 			</div>
 	</div>
 	<!-- End of loop -->
