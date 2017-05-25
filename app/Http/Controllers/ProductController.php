@@ -38,8 +38,16 @@ class ProductController extends Controller
     
    public function showCart()
    {
-   	dd(\Session::get('cart'));
-   }
+   	// dd(\Session::get('cart'));
+      if (!\Session::has('cart')){
+        return view('shopping-cart', ['products' => null]);
+      }
+    
+     $oldcart = \Session::get('cart');
+     $cart = new Cart($oldcart);
+     return view('shopping-cart', ['products'=>$cart->itemsName, 'totalPrice'=>$cart->totalPrice]);
+
+ }
 
     public function showAllProduct()
     {
