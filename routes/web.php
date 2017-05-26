@@ -18,5 +18,8 @@ Route::get('/', function () {
 Route::get('/product/cart', 'ProductController@showCart');
 Route::post('/product/{id}', 'ProductController@addToCart');
 Route::get('/product', 'ProductController@showAllProduct');
+Route::get('/clearCart', 'ProductController@clearCart');
+Route::get('/removeItem/{id}', ['uses'=>'ProductController@removeItem']);
+Route::get('/removeAllItem', 'ProductController@removeAllItem');
 
 

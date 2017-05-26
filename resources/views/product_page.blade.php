@@ -20,21 +20,29 @@
 			</div>
 		</div>
 	</div>
-	@foreach ($products as $product)
-	<div class="row">
-	<div class="col-md-4">
-			<div class="well">
-				<form method="post" action="/product/{{ $product->id }}">
-				<p>{{ $product->item }}</p>
-				
-					{{ csrf_field() }}
-					<input type="submit" name="" value="AddToCart" class="glyphicon glyphicon-plus btn btn-success">
-				</form>
-			
-				<!-- bb -->
+	<div class="container">
+		
+		<div class="row">
+			@foreach ($products as $product)
+			<div class="col-md-4">
+					<div class="well">
+						<form method="post" action="/product/{{ $product->id }}">
+						<p>{{ $product->item }}</p>
+
+						
+							{{ csrf_field() }}
+							<span class="pull-right">{{ $product->price }}Naira</span>
+							<input type="submit" name="" value="AddToCart" class="glyphicon glyphicon-plus btn btn-success">
+						</form>
+					
+						<!-- bb -->
+					</div>
+
 			</div>
+			@endforeach
+			</div>
+			<!-- End of loop -->
+		
 	</div>
-	<!-- End of loop -->
-	@endforeach
 </body>
 </html>
