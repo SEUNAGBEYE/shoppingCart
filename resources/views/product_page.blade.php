@@ -3,7 +3,7 @@
 <head>
 	<title>Product</title>
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-</head>
+ </head>
 <body>
 	<div class="container">
 		<div class="navbar-default">
@@ -20,9 +20,20 @@
 			</div>
 		</div>
 	</div>
+	@if (Session::has('success'))
+		<div class="row">
+			<div class="col-md-6">
+				<div id="charge-message" class="alert alert-success">
+					{{ Session::get('success') }}
+					
+				</div>
+			</div>
+		</div>
+	@endif
 	<div class="container">
 		
 		<div class="row">
+
 			@foreach ($products as $product)
 			<div class="col-md-4">
 					<div class="well">

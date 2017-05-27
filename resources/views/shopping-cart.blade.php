@@ -19,7 +19,7 @@
 		 						<button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle = "dropdown">Action<span class="caret"></span>
 		 						</button>
 		 						<ul class="dropdown-menu">
-		 							<li><a href="/removeItem/{{$product['id']}}">Reduce by 1</a></li>
+		 							<li><a href="/removeItem/{{ $product['id'] }}">Reduce by 1</a></li>
 		 							<li><a href="/removeAllItem">Reduce All</a></li>
 		 						</ul>
 		 					</div>
@@ -36,7 +36,7 @@
 		<hr>
 		<div class="row">
 		 	<div class="col-md-6">
-		 		<button type="button" class="btn btn-success">Checkout</button>
+		 		<a type="button" class="btn btn-success" href="{{ route('checkout') }}">Checkout</button>
 		 		<button type="button" class="btn btn-danger"><a href="/clearCart">Clear Cart</a></button>
 		 	</div>
 		</div>

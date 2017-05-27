@@ -43,13 +43,15 @@ class Cart
         }
     }
 
-    public function reduceByOne($id){
-        dd($id); exit;
-        $this->itemsName[$id]['quantity']--;
-        $this->itemsName[$id]['price']-=$this->itemsName[$id]['item']['price'];
+    // public function reduceByOne($product, $id){
+    //     $this->itemsName[$product->id]['quantity']-=1;
+    //     $this->itemsQuantity=$this->itemsQuantity - 1;
+    //     $this->itemsQuantity-1;
+    //     $this->totalPrice-=$this->itemsName[$product->id]['eachprice'];
+    //     // $this->itemsName[$product->id]['quantity']-=1);
 
-        if ($this->itemsName[$id]['quantity'] <= 0){
-            unset($this->itemsName['id']);
-        }
-    }
+    //     if ($this->itemsName[$id]['quantity'] <= 0){
+    //         unset($this->itemsName['id']);
+    //     }
+    // }
 }

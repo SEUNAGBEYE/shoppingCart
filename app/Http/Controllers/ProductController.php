@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Product;
 use App\Models\Cart;
+use Stripe\Charge;
+use Stripe\Stripe;
 
 class ProductController extends Controller
 {
@@ -56,6 +58,7 @@ class ProductController extends Controller
     public function showAllProduct()
     {
     	// dd($this->cart);
+      // dd(\Request::flash());
     	$quantity = \Session::get('quantity');
     	// $quantity = \Session::put('quantity', 0);;
     	$products = Product::all();
@@ -74,16 +77,13 @@ class ProductController extends Controller
     public function removeItem($id)
     {
      
-     $product = Product::find($id);
+     $product = Product::find($id)->first();
         $oldcart = \Session::has('cart') ? \Session::get('cart'):null;
-        // dd($oldcart);
-        // dd()
-        \Session::flush();
-      $product_name = $product->item;
-      $product_price = $product->price;
-      
-     $cart= new Cart($oldcart);
-       $cart->reduceByOne($product, $product->id);
+        // $cart = new Car()
+        
+      $cart= new Cart($oldcart);
+      $cart->reduceByOne($product, $product->id);
+       return redirect('/product');
 
        \Session::put('cart', $cart);
        // dd(\Session::get('cart'));
@@ -91,9 +91,47 @@ class ProductController extends Controller
     }
 
     public function removeAllItem(){
-      $cart = \Session::get('cart')->itemsName;
-      $id = key($cart);
-      unset($cart[$id]['']);
-      dd($cart);
+      
+      $product = Product::find($id)->first();
+      $oldcart = \Session::has('cart') ? \Session::get('cart'):null;
+
+       $cart= new Cart($oldcart);
+      $cart->reduceByOne($product, $product->id);
     }
+
+    public function getCheckout(){
+      if (!\Session::has('cart')){
+        return view('shopping-cart', ['products' => null]);
+      } 
+
+      $oldcart = \Session::get('cart');
+      $cart = new Cart($oldcart);
+      $total = $cart->totalPrice;
+      return view('checkout', ['total' =>$total]);
+    }
+
+     public function postCheckout(Request $request){
+        if (!\Session::has('cart')){
+          return redirect()->route('shopping-cart');
+        } 
+
+        $oldcart = \Session::get('cart');
+        $cart = new Cart($oldcart);
+
+        Stripe::setApiKey('');
+        try{
+          Charge::create(array(
+            'amount' => $cart->totalPrice,
+            'currency' => 'usd',
+            'source' => $request->input('stripeToken'), //obtain with Stripe.
+            'description' => 'Test Charge'
+            ));
+        }catch (\Exception $e){
+          return redirect()->route('checkout')->with(['error' => $e->getMessage()]);
+        }
+
+        \Session::forget('cart');
+        return redirect('/product')->with('success', 'Successfully purchased');
+    }
+        
 }
