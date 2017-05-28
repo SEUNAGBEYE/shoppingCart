@@ -8,6 +8,8 @@ use App\Models\Product;
 use App\Models\Cart;
 use Stripe\Charge;
 use Stripe\Stripe;
+Use App\Order;
+use Auth;
 
 class ProductController extends Controller
 {
@@ -24,6 +26,7 @@ class ProductController extends Controller
     {
     	
     	$product = Product::find($id);
+     
         $oldcart = \Session::has('cart') ? \Session::get('cart'):null;
         // \Session::flush();
     	// $product_name = $product->item;
@@ -34,6 +37,7 @@ class ProductController extends Controller
 
        \Session::put('cart', $cart);
        // dd(\Session::get('cart'));
+       \Session::flash('added', '1 item Added');
        return redirect()->back();
        
     }
@@ -100,9 +104,13 @@ class ProductController extends Controller
     }
 
     public function getCheckout(){
-      if (!\Session::has('cart')){
-        return view('shopping-cart', ['products' => null]);
-      } 
+      // if (!\Session::has('cart')){
+      //   return view('shopping-cart', ['products' => null]);
+      // } 
+
+       if(!Auth::check()){
+            return redirect()->route('user.signin')->with('login', 'Please Login To Continue Payment');
+          }
 
       $oldcart = \Session::get('cart');
       $cart = new Cart($oldcart);
@@ -115,17 +123,28 @@ class ProductController extends Controller
           return redirect()->route('shopping-cart');
         } 
 
+
         $oldcart = \Session::get('cart');
         $cart = new Cart($oldcart);
 
-        Stripe::setApiKey('');
+        Stripe::setApiKey('Sorry cant put my secret key');
         try{
-          Charge::create(array(
+          $charge = Charge::create(array(
             'amount' => $cart->totalPrice,
             'currency' => 'usd',
             'source' => $request->input('stripeToken'), //obtain with Stripe.
             'description' => 'Test Charge'
             ));
+          // dd('hi');
+         
+          $order = new Order();
+          $order->cart = serialize($cart);
+          $order->address =  $request->input('address');
+          $order->payment_id = $charge->id;
+
+
+          Auth::user()->orders()->save($order);
+          
         }catch (\Exception $e){
           return redirect()->route('checkout')->with(['error' => $e->getMessage()]);
         }

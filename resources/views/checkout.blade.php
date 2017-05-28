@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+@extends('layouts.master')
 <html>
 <head>
 	<title>Checkout</title>
@@ -58,6 +59,7 @@
  	</style>
 </head>
 <body>
+@section('contents')
  	<div class="col-md-6">
 		<h1>Checkout</h1>
 		<h4>Your Total: {{ $total }}</h4>
@@ -77,7 +79,7 @@
 				<div class="col-xs-6">
 					<div class="form-group">
 						<label for="address">Address</label>
-						<input type="text" id="address" class="form-control" required>	
+						<input type="text" id="address" class="form-control" required name="address">	
 					</div>
 				</div>
 
@@ -145,5 +147,6 @@
 			 
 			       
 </script>
+@endsection
  </body>
 </html>

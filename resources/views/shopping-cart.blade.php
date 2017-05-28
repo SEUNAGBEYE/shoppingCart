@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+@extends('layouts.master')
 <html>
 <head>
  	<title>Shopping Cart</title>
@@ -6,6 +7,7 @@
  	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
+@section('contents')
 	@if(Session::has('cart'))
 		 <div class="row">
 		 	<div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
@@ -14,7 +16,7 @@
 		 				<li class="list-group-item">
 		 					<span class="badge">{{ $product['quantity'] }}</span>
 		 					<strong> {{ $product['item'] }}</strong>
-		 					<span class="label label success">{{ $product['eachprice']}}kflvjgdfkljglbm</span>
+		 					<span class="label label-success">{{ $product['eachprice']}}</span>
 		 					<div class="btn-group">
 		 						<button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle = "dropdown">Action<span class="caret"></span>
 		 						</button>
@@ -50,5 +52,6 @@
 
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+@endsection
 </body>
 </html>

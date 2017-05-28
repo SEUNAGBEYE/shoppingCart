@@ -44,9 +44,12 @@ class Cart
     }
 
     // public function reduceByOne($product, $id){
-    //     $this->itemsName[$product->id]['quantity']-=1;
-    //     $this->itemsQuantity=$this->itemsQuantity - 1;
-    //     $this->itemsQuantity-1;
+    //     $this->itemsName[$product->id]['quantity']--;
+    //     $this->[$id]['eachprice']-= $this->itemsName[product->$id]['eachprice'];
+    //     // $this->itemsQuantity=$this->itemsQuantity - 1;
+    //     $this->itemsQuantity--;
+    //     // $this->totalPrice-=$this->itemsName[$product->id]['eachprice'];
+
     //     $this->totalPrice-=$this->itemsName[$product->id]['eachprice'];
     //     // $this->itemsName[$product->id]['quantity']-=1);
 
