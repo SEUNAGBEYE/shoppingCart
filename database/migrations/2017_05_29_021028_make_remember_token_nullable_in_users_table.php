@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class RemoveNameReememberTokenFromUsers extends Migration
+class MakeRememberTokenNullableInUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class RemoveNameReememberTokenFromUsers extends Migration
      */
     public function up()
     {
+        //
         Schema::table('users', function($table){
-            $table->dropColumn('name');
-            $table->dropColumn('remember_token');
+            $table->string('remember_token')->nullable()->change();
         });
     }
 

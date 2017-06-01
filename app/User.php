@@ -2,6 +2,7 @@
 
 namespace App;
 
+
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -28,5 +29,9 @@ class User extends Authenticatable
 
     public function orders(){
         return $this->hasMany('App\Order');
+    }
+
+    public function role(){
+        return $this->hasOne('App\Models\Roles');
     }
 }

@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 @extends('layouts.master')
 <html>
-<head><!DOCTYPE html>
-<html>
 <head>
 	<title>SignIn</title>
 	<style type="text/css">
@@ -18,7 +16,11 @@
 		}
 		.admin {
 			margin-top: 40px;
-			margin-bottom: 40px;
+			/*margin-bottom: 40px*/;
+		}
+		#img{
+			position: absolute;
+			left: 35%;
 		}
 	</style>
 </head>
@@ -42,9 +44,11 @@
 		<strong> {{ \Session::get('login') }} </strong>
 	</div>
 	@endif
-		<h3 class="admin">Sign In</h3>
-<!-- 		<h4>SignUp</h4>
- -->		<form action="" method="post" action="{{ 'user.signin' }}">
+		<h3 class="admin">Administrator Sign In</h3>
+			<div style="position: relative; height: 80px;">
+				<img id="img" src="https://us.123rf.com/450wm/sai0112/sai01121202/sai0112120200007/12730353-metal-padlock-on-white-background.jpg?ver=6" width="50px">
+			</div>
+ 		<form action="" method="post" action="{{ 'adminLogin' }}">
 			<div class="form-group">
 				<label for="email">E-Mail</label>
 				<input type="text" name="email" id="email" class="form-control">
@@ -57,7 +61,6 @@
 			<button type="submit" class="btn btn-primary">SignIn</button>
 			{{ csrf_field() }}
 		</form><br>
-		<p>Don't have an account <a href="{{ route('user.signup') }}">Sign-up</a></p>
 		</div>
 		</div>
 	</div>

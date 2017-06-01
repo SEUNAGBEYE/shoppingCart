@@ -4,14 +4,14 @@
 <head><!DOCTYPE html>
 <html>
 <head>
-	<title>SignIn</title>
+	<title>SignUp</title>
 	<style type="text/css">
 		.box {
 			box-sizing: border-box;
 			display: flex;
 			justify-content: center;
 			align-content: center;
- 			border: 2px solid lightgrey;
+ 			border: 2px solid lightgrey!important;
 			border-radius: 4px;
 			width: 55%!important;
 			height: 400px;
@@ -36,15 +36,10 @@
 			@endforeach
 		</div>
 	@endif
-
-	@if(\Session::has('login'))
-	<div class="alert-info col-md-12" style="margin-top: 10px;">
-		<strong> {{ \Session::get('login') }} </strong>
-	</div>
-	@endif
-		<h3 class="admin">Sign In</h3>
+	
+		<h3 class="admin">Administrator Sign Up</h3>
 <!-- 		<h4>SignUp</h4>
- -->		<form action="" method="post" action="{{ 'user.signin' }}">
+ -->		<form action="" method="post" action="{{ route('user.signup') }}">
 			<div class="form-group">
 				<label for="email">E-Mail</label>
 				<input type="text" name="email" id="email" class="form-control">
@@ -54,10 +49,9 @@
 				<label for="password">Password</label>
 				<input type="password" name="password" id="password" class="form-control">
 			</div>
-			<button type="submit" class="btn btn-primary">SignIn</button>
+			<button type="submit" class="btn btn-primary">Signup</button>
 			{{ csrf_field() }}
 		</form><br>
-		<p>Don't have an account <a href="{{ route('user.signup') }}">Sign-up</a></p>
 		</div>
 		</div>
 	</div>

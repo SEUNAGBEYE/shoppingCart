@@ -4,9 +4,11 @@ namespace App\Http\Middleware;
 
 use Illuminate\Support\Facades\Auth;
 
+use App\User;
+
 use Closure;
 
-class Auth
+class isAdminMiddleware
 {
     /**
      * Handle an incoming request.
@@ -17,6 +19,11 @@ class Auth
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        if(!Auth::guest()){
+            dd('hi');
+
+        }
+
+        return redirect()->route('adminLogin');
     }
 }

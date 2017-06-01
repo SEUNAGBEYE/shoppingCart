@@ -28,9 +28,13 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users Management<span class="caret"></span></a>
           <ul class="dropdown-menu">
             
-            <li><a href="{{ route('user.signup') }}">Signup</a></li>
-            <li><a href="{{ route('user.signin') }}">Sign In</a></li>
-            <li><a href="{{ route('user.logout') }}">Logout</a></li>
+            @if(!Auth::check())
+                <li><a href="{{ route('user.signup') }}">Signup</a></li>
+                <li><a href="{{ route('user.signin') }}">Sign In</a></li>
+            @else
+                  <li><a href="{{ route('user.logout') }}">Logout</a></li>
+                  <li><a href="{{ route('user.profile') }}">Profile</a></li>
+            @endif
             
           </ul>
         </li>

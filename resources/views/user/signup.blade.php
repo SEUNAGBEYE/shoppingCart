@@ -36,7 +36,8 @@
 			@endforeach
 		</div>
 	@endif
-		<h3 class="admin">Administrator Sign Up</h3>
+	
+		<h3 class="admin">Sign Up</h3>
 <!-- 		<h4>SignUp</h4>
  -->		<form action="" method="post" action="{{ route('user.signup') }}">
 			<div class="form-group">
@@ -46,11 +47,12 @@
 
 			<div class="form-group">
 				<label for="password">Password</label>
-				<input type="text" name="password" id="password" class="form-control">
+				<input type="password" name="password" id="password" class="form-control">
 			</div>
 			<button type="submit" class="btn btn-primary">Signup</button>
 			{{ csrf_field() }}
-		</form>
+		</form><br>
+		<p>Already have an account <a href="{{ route('user.signin') }}">Sign In</a></p>
 		</div>
 		</div>
 	</div>

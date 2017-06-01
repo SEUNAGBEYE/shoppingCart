@@ -81,17 +81,17 @@ class ProductController extends Controller
     public function removeItem($id)
     {
      
-     $product = Product::find($id)->first();
+     $product = Product::find($id);
         $oldcart = \Session::has('cart') ? \Session::get('cart'):null;
         // $cart = new Car()
         
       $cart= new Cart($oldcart);
       $cart->reduceByOne($product, $product->id);
-       return redirect('/product');
+       return redirect('/product/cart');
 
        \Session::put('cart', $cart);
        // dd(\Session::get('cart'));
-      // return redirect('/product/cart');
+      return redirect('/product/cart');
     }
 
     public function removeAllItem(){
@@ -121,13 +121,15 @@ class ProductController extends Controller
      public function postCheckout(Request $request){
         if (!\Session::has('cart')){
           return redirect()->route('shopping-cart');
-        } 
+        }
+
+        \Session::flash('sign-in', 'Please sign in to checkout');
 
 
         $oldcart = \Session::get('cart');
         $cart = new Cart($oldcart);
 
-        Stripe::setApiKey('Sorry cant put my secret key');
+        Stripe::setApiKey('sk_test_S0cieYAM0JvqnpqM4oDT8Yj8');
         try{
           $charge = Charge::create(array(
             'amount' => $cart->totalPrice,

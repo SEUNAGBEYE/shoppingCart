@@ -4,9 +4,11 @@ namespace App\Http\Middleware;
 
 use Illuminate\Support\Facades\Auth;
 
+use App\User;
+
 use Closure;
 
-class Auth
+class superAdminMiddleware
 {
     /**
      * Handle an incoming request.
@@ -17,6 +19,11 @@ class Auth
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        if(Auth::user()->role()->where('superAdmin', 1)){
+           return $next($request); 
+        }
+
+        return redirect()->route('product.index');
+    
     }
 }

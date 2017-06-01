@@ -38,8 +38,10 @@
 		<hr>
 		<div class="row">
 		 	<div class="col-md-6">
-		 		<a type="button" class="btn btn-success" href="{{ route('checkout') }}">Checkout</button>
-		 		<button type="button" class="btn btn-danger"><a href="/clearCart">Clear Cart</a></button>
+		 		<button type="button" class="btn btn-success"><a href="{{ route('checkout') }}" style="text-decoration: none; color: white;">Checkout</a></button>
+		 		<button type="button" class="btn btn-danger"><a href="/clearCart" style="text-decoration: none; color: white;">Clear Cart</a></button>
+		 		<button type="button" class="btn btn-info"><a href="/product" style="text-decoration: none; color: white;">Continue Shopping</a></button>
+
 		 	</div>
 		</div>
 		@else
@@ -53,5 +55,11 @@
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 @endsection
+<script
+src="http://code.jquery.com/jquery-1.12.4.min.js"
+integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+crossorigin="anonymous"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body>
 </html>

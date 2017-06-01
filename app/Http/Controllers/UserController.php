@@ -28,7 +28,7 @@ class UserController extends Controller
     		]);
 
     	$user->save();
-
+        \Session::flash('success-signup', 'Your account has been created please Login');
     	return redirect()->route('product.index');
     }
 
@@ -44,12 +44,18 @@ class UserController extends Controller
             'email' => 'email|required',
             'password' => 'required|min:4'
             ]);
+
         if(\Session::has('cart')){
             if(Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])){
-                // return redirect()->back();
-                return redirect()->intended('checkout');
+                return redirect()->route('checkout');
             }
         }else{
+            try {
+                Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]);
+            }catch(Exception $e){
+                dd('hi');
+            }
+            
             return redirect()->route('user.profile');
         }
         
@@ -57,7 +63,17 @@ class UserController extends Controller
     }
 
     public function getProfile(){
-        return view('user.profile');
+        if(Auth::check()){
+            $orders = Auth::user()->orders;
+            $orders->transform(function($order, $key) {
+                $order->cart =unserialize($order->cart);
+                return $order;
+            });
+            return view('user.profile', ['orders'=> $orders]);  
+        }else{
+            return redirect()->route('user.signin');
+        }
+        
     }
 
     public function getLogout(){

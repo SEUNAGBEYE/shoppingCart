@@ -80,5 +80,79 @@ Route::post('/checkout', [
 	]);
 
 
+// ROUTE FOR ADMIN
+
+Route::group(['prefix'=>'admin',], function(){
+	Route::get('/dashboard', [
+		'uses' => 'AdminController@dashboard',
+		'as' => 'dashboard'
+		])->middleware('admin');
+	
+	
+
+	Route::get('/viewUsers', [
+	'uses'=> 'AdminController@viewAllUser',
+	'as' => 'viewUsers'
+	])->middleware('admin');;
+
+	Route::get('/viewProduct', [
+	'uses'=> 'AdminController@viewProduct',
+	'as' => 'viewProduct'
+	])->middleware('admin');
+
+	Route::delete('/deleteProduct/{id}', [
+	'uses'=> 'AdminController@viewProduct',
+	'as' => 'deleteProduct'
+	])->middleware('admin');
+
+	Route::post('/addProduct/{id}', [
+	'uses'=> 'AdminController@viewProduct',
+	'as' => 'addProduct'
+	])->middleware('admin');
+
+
+
+	Route::post('updateProduct/{id}', [
+	'uses'=> 'AdminController@updateProduct',
+	'as' => 'updateProduct'
+	])->middleware('admin');
+
+	Route::get('/editProduct/{id}', [
+	'uses'=> 'AdminController@updateProduct',
+	'as' => 'editProduct'
+	])->middleware('admin');
+
+	Route::get('/viewOrders', [
+	'uses'=> 'AdminController@viewOrders',
+	'as' => 'viewOrders'
+	])->middleware('admin');
+
+	Route::get('/login', [
+	'uses'=> 'AdminController@login',
+	'as' => 'adminLogin'
+	]);
+
+	Route::post('/login', [
+	'uses'=> 'AdminController@login',
+	'as' => 'adminLogin'
+	]);
+
+});
+
+	
+	Route::group(['prefix'=>'admin',], function(){
+
+		Route::get('/addAdmin', [
+		'uses'=> 'AdminController@addAdmin',
+		'as' => 'addAdmin'
+		])->middleware('superAdmin');
+
+		Route::post('/addAdmin', [
+		'uses'=> 'AdminController@addAdmin',
+		'as' => 'addAdmin'
+		])->middleware('superAdmin');
+	});
+
+
 
 

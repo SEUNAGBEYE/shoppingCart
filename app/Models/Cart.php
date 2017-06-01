@@ -38,23 +38,22 @@ class Cart
     	$this->itemsQuantity++;
     	$this->totalPrice+= $itemName->price;
 
+        
+    }
+
+    public function reduceByOne($product, $id){
+        $this->itemsName[$id]['quantity']--;
+        // dd($this->itemsName[$product->id]['eachprice']);
+        $this->itemsName[$id]['eachprice']-=  $this->itemsName[$id]['eachprice'];
+        // $this->itemsQuantity=$this->itemsQuantity - 1;
+        $this->itemsQuantity--;
+        // $this->totalPrice-=$this->itemsName[$product->id]['eachprice'];
+
+        $this->totalPrice-=$this->itemsName[$id]['eachprice'];
+        // $this->itemsName[$product->id]['quantity']-=1);
+
         if ($this->itemsName[$id]['quantity'] <= 0){
             unset($this->itemsName['id']);
         }
     }
-
-    // public function reduceByOne($product, $id){
-    //     $this->itemsName[$product->id]['quantity']--;
-    //     $this->[$id]['eachprice']-= $this->itemsName[product->$id]['eachprice'];
-    //     // $this->itemsQuantity=$this->itemsQuantity - 1;
-    //     $this->itemsQuantity--;
-    //     // $this->totalPrice-=$this->itemsName[$product->id]['eachprice'];
-
-    //     $this->totalPrice-=$this->itemsName[$product->id]['eachprice'];
-    //     // $this->itemsName[$product->id]['quantity']-=1);
-
-    //     if ($this->itemsName[$id]['quantity'] <= 0){
-    //         unset($this->itemsName['id']);
-    //     }
-    // }
 }
