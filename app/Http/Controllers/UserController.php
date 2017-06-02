@@ -19,12 +19,14 @@ class UserController extends Controller
 
     	$this->validate($request, [
     		'email' => 'email|required|unique:users',
-    		'password' => 'required|min:4'
+    		'password' => 'required|min:4|confirmed'
     		]);
 
     	$user = new User([
     		'email' => $request->input('email'),
-    		'password' => bcrypt($request->input('password'))
+    		'password' => bcrypt($request->input('password')),
+            'role_id' => intval($request->input('role_id')),
+
     		]);
 
     	$user->save();
@@ -34,7 +36,12 @@ class UserController extends Controller
 
 
     public function getSignin(){
-       return view('user.login');
+        if(Auth::check()){
+            return redirect()->route('user.profile');
+        }else{
+           return view('user.login'); 
+        }
+       
     }
 
     public function postSignin(Request $request){
