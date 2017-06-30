@@ -16,6 +16,7 @@ class UsersTableSeeder extends Seeder
         'email'=>'agbeyeseun1@gmail.com',
         'role_id'=>'1',
         'password'=> bcrypt('mother1234'),
+        'status_id' => '1',
         ]);
     }
 }
