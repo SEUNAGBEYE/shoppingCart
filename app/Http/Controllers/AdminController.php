@@ -18,32 +18,34 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     //
-    public function dashboard(){dd($request);
+    public function dashboard(){
     	return view('admin.admin');
     }
+    
 
-    public function addAdmin(Request $request){
-    	if($request->isMethod('Post')){
+    // public function addAdmin(Request $request){
+    // 	if($request->isMethod('Post')){
     		
-    		$this->validate($request, [
-    		'email' => 'email|required|unique:users',
-    		'password' => 'required|min:4|confirmed'
-    		]);
+    // 		$this->validate($request, [
+    // 		'email' => 'email|required|unique:users',
+    // 		'password' => 'required|min:4|confirmed'
+    // 		]);
 
-    		$user = new User([
-    		'email' => $request->input('email'),
-    		'password' => bcrypt($request->input('password')),
-            'role_id' => intval($request->input('role_id')),
-            'status_id' => intval($request->input('status_id'))
-    		]);
+    // 		$user = new User([
+    // 		'email' => $request->input('email'),
+    // 		'password' => bcrypt($request->input('password')),
+    //         'role_id' => intval($request->input('role_id')),
+    //         'status_id' => intval($request->input('status_id'))
+    // 		]);
 
-    		$user->save();
+    // 		$user->save();
 
-            return redirect()->route('dashboard');
+    //         return redirect()->route('dashboard');
 
-    	}else{
-    		return view('admin.signup');
-    	}
+    // 	}else{
+    // 		return view('admin.signup');
+    // 	}
+    // }
 
 
     public function login(Request $request)
@@ -110,12 +112,13 @@ class AdminController extends Controller
                 break;
             }
     }
-
-    public function dashboard(){
-        if(Auth::check()){
-            return view('admin.admin');
-        }else{
-            return redirect()->route('adminLogin');
-        }
-    }
 }
+
+//     public function dashboard(){
+//         if(Auth::check()){
+//             return view('admin.admin');
+//         }else{
+//             return redirect()->route('adminLogin');
+//         }
+//     }
+// }
