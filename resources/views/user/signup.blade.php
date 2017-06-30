@@ -16,10 +16,7 @@
 			width: 55%!important;
 			height: 400px;
 		}
-		.admin {
-			margin-top: 40px;
-			margin-bottom: 40px;
-		}
+		
 	</style>
 </head>
 <body>
@@ -49,6 +46,15 @@
 				<label for="password">Password</label>
 				<input type="password" name="password" id="password" class="form-control">
 			</div>
+
+			<input type="hidden" name="role_id" id="role_id" value="3" class="form-control">
+			<input type="hidden" name="status_id" id="status_id" value="1" class="form-control">
+
+			<div class="form-group">
+				<label for="password_confirmation">Password Confirmation</label>
+				<input type="password" name="password_confirmation" id="password_confirmation" class="form-control">
+			</div>
+
 			<button type="submit" class="btn btn-primary">Signup</button>
 			{{ csrf_field() }}
 		</form><br>

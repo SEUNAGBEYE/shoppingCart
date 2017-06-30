@@ -19,12 +19,15 @@ class UserController extends Controller
 
     	$this->validate($request, [
     		'email' => 'email|required|unique:users',
-    		'password' => 'required|min:4'
+    		'password' => 'required|min:4|confirmed'
     		]);
 
     	$user = new User([
     		'email' => $request->input('email'),
-    		'password' => bcrypt($request->input('password'))
+    		'password' => bcrypt($request->input('password')),
+            'role_id' => intval($request->input('role_id')),
+            'status_id' => intval($request->input('status_id'))
+
     		]);
 
     	$user->save();

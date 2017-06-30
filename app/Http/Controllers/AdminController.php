@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     //
-    public function dashboard(){
+    public function dashboard(){dd($request);
     	return view('admin.admin');
     }
 
@@ -27,23 +27,19 @@ class AdminController extends Controller
     		
     		$this->validate($request, [
     		'email' => 'email|required|unique:users',
-    		'password' => 'required|min:4'
+    		'password' => 'required|min:4|confirmed'
     		]);
 
     		$user = new User([
     		'email' => $request->input('email'),
-    		'password' => bcrypt($request->input('password'))
+    		'password' => bcrypt($request->input('password')),
+            'role_id' => intval($request->input('role_id')),
+            'status_id' => intval($request->input('status_id'))
     		]);
 
     		$user->save();
 
-    		$roles= new Roles([
-    			'user_id'=>$user->id,
-    			'Admin'=>1
-    			]);
-    		$roles->save();
-
-    		
+            return redirect()->route('dashboard');
 
     	}else{
     		return view('admin.signup');

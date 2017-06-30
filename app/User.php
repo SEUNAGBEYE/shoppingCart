@@ -15,7 +15,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = ['email', 'password',
+    protected $fillable = ['email', 'password', 'role_id', 'status_id'
     ];
 
     /**
@@ -33,5 +33,9 @@ class User extends Authenticatable
 
     public function role(){
         return $this->hasOne('App\Models\Roles');
+    }
+
+    public function status(){
+        return $this->hasOne('App\Models\Statuses');
     }
 }

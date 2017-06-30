@@ -20,8 +20,7 @@ class isAdminMiddleware
     public function handle($request, Closure $next)
     {
         if(!Auth::guest()){
-            dd('hi');
-
+            return redirect($next);
         }
 
         return redirect()->route('adminLogin');

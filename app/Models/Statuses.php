@@ -2,15 +2,13 @@
 
 namespace App\Models;
 
-
 use Illuminate\Database\Eloquent\Model;
 
-class Roles extends Model
+class Statuses extends Model
 {
-	protected $fillable = ['name'];
+    //
 
-	public function user(){
+    public function user(){
 		$this->belongsTo('App\User');
 	}
-   
 }
