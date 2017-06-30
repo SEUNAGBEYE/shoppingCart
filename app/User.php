@@ -32,10 +32,12 @@ class User extends Authenticatable
     }
 
     public function role(){
-        return $this->hasOne('App\Models\Roles');
+        return $this->belongsTo('App\Models\Roles', 'role_id');
     }
+
 
     public function status(){
         return $this->hasOne('App\Models\Statuses');
     }
+
 }

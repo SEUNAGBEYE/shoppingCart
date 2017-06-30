@@ -56,8 +56,11 @@
 			</div>
 
 			<div class="form-group">
+
 				<label for="password_confirmation">Confirm Password</label>
 				<input type="password" name="password_confirmation" id="password_confirmation" class="form-control">
+				<label for="confirm_password">Confirm Password</label>
+				<input type="password" name="confirm_password" id="confirm_password" class="form-control">
 			</div>
 			<button type="submit" class="btn btn-primary">Signup</button>
 			{{ csrf_field() }}

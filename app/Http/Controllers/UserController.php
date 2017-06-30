@@ -37,7 +37,12 @@ class UserController extends Controller
 
 
     public function getSignin(){
-       return view('user.login');
+        if(Auth::check()){
+            return redirect()->route('user.profile');
+        }else{
+           return view('user.login'); 
+        }
+       
     }
 
     public function postSignin(Request $request){
