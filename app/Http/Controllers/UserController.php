@@ -49,22 +49,52 @@ class UserController extends Controller
         // return view('user.signup');
 
         $this->validate($request, [
-            'email' => 'email|required',
+            // 'email' => 'email|required',
             'password' => 'required|min:4'
             ]);
 
-        if(\Session::has('cart')){
-            if(Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])){
+        if(\Session::has('cart'))
+        {
+            if(Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]))
+            {
                 return redirect()->route('checkout');
             }
-        }else{
-            try {
-                Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]);
-            }catch(Exception $e){
-                dd('hi');
+            elseif (Auth::attempt(['username' => $request->input('email'), 'password' => $request->input('password')])) 
+            {
+                # code...
+                return redirect()->route('checkout');
             }
+            else
+            {
+                return back();
+            }
+
+
+        }
+        else
+        {
+
+
+                if(Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')]))
+                {
+                    // dd('hi');
+                    return redirect()->route('user.profile');
+                }
+                elseif (Auth::attempt(['username' => $request->input('email'), 'password' => $request->input('password')])) 
+                {
+                    // dd('elseif');
+                    # code...
+                    return redirect()->route('user.profile');
+                }
+                else
+                {
+                    dd('else');
+                    return redirect()->route('user.profile');
+                }
+                // dd('none');
+
             
-            return redirect()->route('user.profile');
+            
         }
         
         // return redirect()->intended('checkout');

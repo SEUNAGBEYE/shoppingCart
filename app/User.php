@@ -15,7 +15,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = ['email', 'password', 'role_id', 'status_id'
+    protected $fillable = ['email', 'password', 'role_id', 'status_id',
     ];
 
     /**
@@ -26,6 +26,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+ 
+    // protected $username = 'username';
+
 
     public function orders(){
         return $this->hasMany('App\Order');
@@ -39,5 +44,10 @@ class User extends Authenticatable
     public function status(){
         return $this->hasOne('App\Models\Statuses');
     }
+
+    // public function loginUsername()
+    // {
+    //     return property_exists($this, 'username') ? $this->username : 'email';
+    // }
 
 }
